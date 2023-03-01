@@ -15,9 +15,10 @@ export default function SignInForm(): JSX.Element {
   } = useForm<SignInFormValues>({ resolver });
 
   const [rememeberMe, setRememberMe] = useState<boolean>(false);
+
   const rememberMeToggle = () => setRememberMe((currentVal) => !currentVal);
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => alert(data));
 
   return (
     <form

@@ -3,30 +3,37 @@ import { IoSend } from "react-icons/io5";
 import { isValidEmailFormat } from "~/lib/utilities";
 
 export default function ForgotPassword(): JSX.Element {
-  const [email, setEmail] = useState<string>("");
-  const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) =>
-    setEmail(e.currentTarget.value);
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
-
-  const handleSubmit = () => {
-    alert(email);
-  };
-
-  useEffect(() => {
-    if (isValidEmailFormat({ email: email })) {
-      setIsSubmitDisabled(false);
-    } else {
-      setIsSubmitDisabled(true);
-    }
-  }, [email]);
-
-  return (
-    <div className="flex flex-col items-center justify-center py-3">
+  const ModalToggle = (): JSX.Element => (
+    <>
       <label htmlFor="my-modal-3" role={"button"}>
         Forgot Password?
       </label>
 
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+    </>
+  );
+
+  const ForgotPasswordModal = (): JSX.Element => {
+    const [email, setEmail] = useState<string>("");
+
+    const handleOnChange: ChangeEventHandler<HTMLInputElement> = (e) =>
+      setEmail(e.currentTarget.value);
+
+    const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+
+    const handleSubmit = () => {
+      alert(email);
+    };
+
+    useEffect(() => {
+      if (isValidEmailFormat({ email: email })) {
+        setIsSubmitDisabled(false);
+      } else {
+        setIsSubmitDisabled(true);
+      }
+    }, [email]);
+
+    return (
       <div className="modal">
         <div className="modal-box relative">
           <label
@@ -55,6 +62,13 @@ export default function ForgotPassword(): JSX.Element {
           </div>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center py-3">
+      <ModalToggle />
+      <ForgotPasswordModal />
     </div>
   );
 }
