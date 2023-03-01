@@ -82,7 +82,7 @@ const NAV_ROUTES = [
     id: "transactions",
   },
   {
-    name: "Registratns",
+    name: "Registrants",
     href: "/admin/registrants",
     hasChildRoute: false,
     id: "registrants",

@@ -20,7 +20,6 @@ const PageViewAction: NextPage = (): JSX.Element => {
           <SideBar />
           <div className="flex h-[15vh] w-full flex-row items-center justify-between px-9">
             <div className="flex flex-row items-center space-x-5">
-              <MdSpaceDashboard size={85} className="hidden lg:flex" />
               <div className="flex flex-col items-stretch justify-center">
                 <h1 className="text-4xl font-bold uppercase text-slate-800">
                   {router.asPath.split("/")[2]?.split("_").join(" ")}
