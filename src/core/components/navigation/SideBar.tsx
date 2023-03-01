@@ -1,9 +1,5 @@
 import Router from "next/router";
-import {
-  MdAdminPanelSettings,
-  MdArrowRight,
-  MdArrowDropDown,
-} from "react-icons/md";
+import { MdAdminPanelSettings, MdArrowRight } from "react-icons/md";
 import NAV_ROUTES from "~/core/constants/data/navRoutes";
 
 const SideBar = (): JSX.Element => (
