@@ -6,7 +6,7 @@ import { MdSpaceDashboard, MdArrowRight } from "react-icons/md";
 import SideBar from "~/core/components/navigation/SideBar";
 import NAV_ROUTES from "~/core/constants/data/navRoutes";
 
-const PageView: NextPage = (): JSX.Element => {
+const PageViewAction: NextPage = (): JSX.Element => {
   const router = useRouter();
   return (
     <>
@@ -69,4 +69,4 @@ const PageView: NextPage = (): JSX.Element => {
   );
 };
 
-export default PageView;
+export default PageViewAction;

@@ -1,4 +1,10 @@
-import { MdAdminPanelSettings, MdArrowRight } from "react-icons/md";
+import Router from "next/router";
+import {
+  MdAdminPanelSettings,
+  MdArrowRight,
+  MdArrowDropDown,
+} from "react-icons/md";
+import NAV_ROUTES from "~/core/constants/data/navRoutes";
 
 const SideBar = (): JSX.Element => (
   <div className="hidden w-[40vh] flex-col justify-between bg-white p-5 lg:flex">
@@ -7,8 +13,23 @@ const SideBar = (): JSX.Element => (
       <p className="text-slate-400">DigiPay</p>
     </div>
 
-    <div className="flex flex-col items-stretch justify-start">
-      Nav Bar Buttons
+    <div className="flex max-h-[80%] flex-col items-stretch justify-start space-y-5 overflow-scroll first:space-y-0 last:space-y-0">
+      {NAV_ROUTES.map((nav) => {
+        return (
+          <div
+            key={nav.name}
+            role={"button"}
+            onClick={() => {
+              void Router.push(nav.href);
+            }}
+            className="flex flex-row items-center justify-between hover:text-primary"
+          >
+            <div className="flex flex-row items-center justify-start space-x-2">
+              <p>{nav.name}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
 
     <div className="dropdown-end dropdown dropdown-right" role="button">
