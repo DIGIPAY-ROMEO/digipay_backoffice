@@ -10,7 +10,11 @@ const SideBar = (): JSX.Element => {
 
   return (
     <div className="hidden max-h-[100vh] w-[40vh] flex-col justify-between bg-white p-5 lg:flex">
-      <div className="flex flex-col items-stretch justify-center">
+      <div
+        className="flex flex-col items-stretch justify-center"
+        role={"button"}
+        onClick={() => void Router.push("/admin/dashboard")}
+      >
         <h1 className="text-2xl font-bold text-primary">BACK OFFICE</h1>
         <p className="text-slate-400">DigiPay</p>
       </div>
@@ -19,6 +23,7 @@ const SideBar = (): JSX.Element => {
         type="text"
         className="input bg-slate-200"
         placeholder="Search..."
+        value={searchedNav}
         onChange={handleOnChange}
       />
       <div className="flex max-h-[75%] min-h-[75%] flex-col items-stretch justify-start space-y-5 overflow-scroll first:space-y-0 last:space-y-0">
@@ -31,6 +36,7 @@ const SideBar = (): JSX.Element => {
               role={"button"}
               onClick={() => {
                 void Router.push(nav.href);
+                setSearchNav("");
               }}
               className="flex flex-row items-center justify-between hover:text-primary"
             >
@@ -42,7 +48,7 @@ const SideBar = (): JSX.Element => {
         })}
       </div>
 
-      <div className="dropdown-end dropdown-right dropdown" role="button">
+      <div className="dropdown-right dropdown-end dropdown" role="button">
         <div
           tabIndex={0}
           className="flex flex-row items-center justify-between"

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type SignInFormValues from "~/lib/@types/sign_in/SignInFormValues";
@@ -18,7 +19,10 @@ export default function SignInForm(): JSX.Element {
 
   const rememberMeToggle = () => setRememberMe((currentVal) => !currentVal);
 
-  const onSubmit = handleSubmit((data) => alert(data));
+  const onSubmit = handleSubmit((data) => {
+    void Router.push("/admin/dashboard");
+    alert(JSON.stringify(data));
+  });
 
   return (
     <form

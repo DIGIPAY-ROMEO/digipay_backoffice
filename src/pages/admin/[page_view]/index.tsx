@@ -27,7 +27,7 @@ const PageView: NextPage = (): JSX.Element => {
                 <div className="breadcrumbs text-sm text-slate-400">
                   <ul>
                     <li>
-                      <Link href={"/admin/dashboard"} className="capitalize">
+                      <Link href={router.asPath} className="capitalize">
                         {router.asPath.split("/")[1]?.split("_").join(" ")}
                       </Link>
                     </li>
@@ -54,7 +54,9 @@ const PageView: NextPage = (): JSX.Element => {
                   >
                     {route.childRoutes?.map((childRoute) => (
                       <li key={childRoute.href}>
-                        <Link href={childRoute.href}>{childRoute.name}</Link>
+                        <Link className="text-sm" href={childRoute.href}>
+                          {childRoute.name}
+                        </Link>
                       </li>
                     ))}
                   </ul>

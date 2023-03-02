@@ -9,23 +9,37 @@ const NAV_ROUTES = [
     name: "Admin Users",
     href: "/admin/admin_users",
     hasChildRoute: true,
+    id: "admin_users",
     childRoutes: [
       {
-        name: "Users",
-        href: "/admin/admin_users/users",
+        name: "Admin Users",
+        href: "/admin/admin_users",
       },
       {
         name: "Roles",
         href: "/admin/admin_users/roles",
       },
     ],
-    id: "admin_users",
   },
   {
     name: "Billers",
     href: "/admin/billers",
     hasChildRoute: true,
     id: "billers",
+    childRoutes: [
+      {
+        name: "Billers",
+        href: "/admin/billers",
+      },
+      {
+        name: "Consumer Accounts",
+        href: "/admin/billers/consumer_accounts",
+      },
+      {
+        name: "Bill Statements",
+        href: "/admin/billers/bill_statements",
+      },
+    ],
   },
   {
     name: "Digipay Agent Asms",
@@ -41,9 +55,19 @@ const NAV_ROUTES = [
   },
   {
     name: "Digipay Top-ups",
-    href: "/admin/topups",
-    hasChildRoute: false,
-    id: "agents",
+    href: "/admin/digipay_top-ups",
+    hasChildRoute: true,
+    id: "topups",
+    childRoutes: [
+      {
+        name: "Digipay Top-ups",
+        href: "/admin/digipay_top-ups",
+      },
+      {
+        name: "Thunder Top-ups",
+        href: "/admin/digipay_top-ups/thunder_topups",
+      },
+    ],
   },
   {
     name: "Ledgers",
@@ -52,22 +76,72 @@ const NAV_ROUTES = [
     id: "agents",
   },
   {
-    name: "Merchants",
+    name: "Merchant",
     href: "/admin/merchants",
     hasChildRoute: true,
     id: "merchants",
+    childRoutes: [
+      {
+        name: "Merchants",
+        href: "/admin/merchants",
+      },
+      {
+        name: "Branches",
+        href: "/admin/merchants/branches",
+      },
+      {
+        name: "Branch Agents",
+        href: "/admin/merchants/branch_agents",
+      },
+      {
+        name: "Customers",
+        href: "/admin/merchants/customers",
+      },
+      {
+        name: "Customer Infos",
+        href: "/admin/merchants/customer_in",
+      },
+    ],
   },
   {
     name: "Plans",
     href: "/admin/plans",
     hasChildRoute: true,
     id: "plans",
+    childRoutes: [
+      {
+        name: "Plans",
+        href: "/admin/plans",
+      },
+      {
+        name: "Subscriptions",
+        href: "/admin/plans/subscriptions",
+      },
+    ],
   },
   {
-    name: "Products",
-    href: "/admin/products",
+    name: "Product Operations",
+    href: "/admin/products_operations",
     hasChildRoute: true,
     id: "products",
+    childRoutes: [
+      {
+        name: "Product Operations",
+        href: "/admin/products_operations",
+      },
+      {
+        name: "Product Categories",
+        href: "/admin/products_operations/product_categories",
+      },
+      {
+        name: "Providers",
+        href: "/admin/products_operations/providers",
+      },
+      {
+        name: "Provider Products",
+        href: "/admin/products_operations/provider_products",
+      },
+    ],
   },
   {
     name: "SMS",
@@ -80,6 +154,16 @@ const NAV_ROUTES = [
     href: "/admin/transactions",
     hasChildRoute: true,
     id: "transactions",
+    childRoutes: [
+      {
+        name: "Transactions",
+        href: "/admin/transactions",
+      },
+      {
+        name: "Transaction Statuses",
+        href: "/admin/transactions/transaction_statuses",
+      },
+    ],
   },
   {
     name: "Registrants",
@@ -104,6 +188,20 @@ const NAV_ROUTES = [
     href: "/admin/support_tools",
     hasChildRoute: true,
     id: "support_tools",
+    childRoutes: [
+      {
+        name: "Support Tools",
+        href: "/admin/support_tools",
+      },
+      {
+        name: "Banks",
+        href: "/admin/support_tools/banks",
+      },
+      {
+        name: "Change Password Request",
+        href: "/admin/support_tools/change_password_requests",
+      },
+    ],
   },
   {
     name: "Configurations",

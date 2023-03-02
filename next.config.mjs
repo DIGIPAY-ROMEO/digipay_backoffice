@@ -9,7 +9,15 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-
+  async redirects() {
+    return [
+      {
+        source: "/admin",
+        destination: "/admin/dashboard",
+        permanent: false,
+      },
+    ];
+  },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
    * must comment the below `i18n` config out.

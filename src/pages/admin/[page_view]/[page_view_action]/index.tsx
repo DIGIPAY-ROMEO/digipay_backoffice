@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { MdSpaceDashboard, MdArrowRight } from "react-icons/md";
+import Router, { useRouter } from "next/router";
+import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import SideBar from "~/core/components/navigation/SideBar";
 import NAV_ROUTES from "~/core/constants/data/navRoutes";
 
@@ -26,40 +27,44 @@ const PageViewAction: NextPage = (): JSX.Element => {
                 </h1>
                 <div className="breadcrumbs text-sm text-slate-400">
                   <ul>
-                    <li>
-                      <Link href={"/admin/dashboard"} className="capitalize">
-                        {router.asPath.split("/")[1]?.split("_").join(" ")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={router.asPath} className="capitalize">
-                        {router.asPath.split("/")[2]?.split("_").join(" ")}
-                      </Link>
-                    </li>
+                    {router.asPath
+                      .split("/")
+                      .map((route: string, index: number) => {
+                        if (index === 0) {
+                          return <></>;
+                        } else {
+                          return (
+                            <li key={route}>
+                              <Link
+                                href={
+                                  index === 2
+                                    ? `/admin/${router.asPath.split("/")[2]!}`
+                                    : router.asPath
+                                }
+                                className="capitalize"
+                              >
+                                {router.asPath
+                                  .split("/")
+                                  [index]?.split("_")
+                                  .join(" ")}
+                              </Link>
+                            </li>
+                          );
+                        }
+                      })}
                   </ul>
                 </div>
               </div>
-              {NAV_ROUTES.filter(
-                (route) => router.asPath === route.href && route.hasChildRoute
-              ).map((route) => (
-                <div
-                  key={route.id}
-                  role={"button"}
-                  className="dropdown dropdown-right dropdown-hover "
-                >
-                  <MdArrowRight tabIndex={0} size={60} />
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content menu rounded-box w-52 bg-white p-2 shadow"
-                  >
-                    {route.childRoutes?.map((childRoute) => (
-                      <li key={childRoute.href}>
-                        <Link href={childRoute.href}>{childRoute.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              <div
+                role="button"
+                onClick={() =>
+                  void Router.push(`/admin/${Router.asPath.split("/")[2]!}`)
+                }
+                className="flex flex-row items-center"
+              >
+                <MdArrowLeft tabIndex={0} size={30} />
+                <p>Go Back</p>
+              </div>
             </div>
           </div>
         </main>
