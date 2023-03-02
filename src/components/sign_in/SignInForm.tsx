@@ -50,7 +50,7 @@ export default function SignInForm(): JSX.Element {
 
       <div className="form-control">
         <label className="label cursor-pointer">
-          <span className="label-text">Remember me</span>
+          <span className="label-text">Remember me?</span>
           <input
             type="checkbox"
             className="toggle-primary toggle"

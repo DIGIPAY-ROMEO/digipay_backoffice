@@ -21,12 +21,12 @@ const SideBar = (): JSX.Element => {
 
       <input
         type="text"
-        className="input bg-slate-200"
+        className="input my-5 bg-slate-200 transition-all ease-in-out focus:shadow-md focus:outline-none active:outline-none"
         placeholder="Search..."
         value={searchedNav}
         onChange={handleOnChange}
       />
-      <div className="flex max-h-[75%] min-h-[75%] flex-col items-stretch justify-start space-y-5 overflow-scroll first:space-y-0 last:space-y-0">
+      <div className="flex flex-1 flex-col items-stretch justify-start overflow-scroll pl-3 ">
         {NAV_ROUTES.filter((route) =>
           route.name.toLowerCase().includes(searchedNav.toLowerCase())
         ).map((nav) => {
@@ -38,17 +38,27 @@ const SideBar = (): JSX.Element => {
                 void Router.push(nav.href);
                 setSearchNav("");
               }}
-              className="flex flex-row items-center justify-between hover:text-primary"
+              className={`flex flex-row items-center justify-between rounded-lg p-3 hover:text-primary ${
+                Router.asPath.includes(nav.href) ? "bg-slate-100" : ""
+              }`}
             >
               <div className="flex flex-row items-center justify-start space-x-2">
-                <p>{nav.name}</p>
+                <p
+                  className={
+                    Router.asPath.includes(nav.href)
+                      ? "font-bold text-primary"
+                      : ""
+                  }
+                >
+                  {nav.name}
+                </p>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="dropdown-right dropdown-end dropdown" role="button">
+      <div className="dropdown-right dropdown-end dropdown pt-2" role="button">
         <div
           tabIndex={0}
           className="flex flex-row items-center justify-between"
