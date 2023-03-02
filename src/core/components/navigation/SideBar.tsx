@@ -1,5 +1,6 @@
+import Link from "next/link";
 import Router from "next/router";
-import { ChangeEventHandler, useState } from "react";
+import { type ChangeEventHandler, useState } from "react";
 import { MdAdminPanelSettings, MdArrowRight } from "react-icons/md";
 import NAV_ROUTES from "~/core/constants/data/navRoutes";
 
@@ -77,13 +78,13 @@ const SideBar = (): JSX.Element => {
           className="dropdown-content menu rounded-box w-52 bg-white p-2 shadow"
         >
           <li>
-            <a>Profile</a>
+            <Link href="/">Profile</Link>
           </li>
           <li>
-            <a>Settings</a>
+            <Link href="/">Settings</Link>
           </li>
           <li>
-            <a>Sign Out</a>
+            <Link href="/">Sign Out</Link>
           </li>
         </ul>
       </div>

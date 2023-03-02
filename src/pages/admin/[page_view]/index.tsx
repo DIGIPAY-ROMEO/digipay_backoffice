@@ -18,7 +18,7 @@ const PageView: NextPage = (): JSX.Element => {
       {router.isReady && (
         <main className="flex min-h-screen flex-row items-stretch justify-start bg-base-100 text-slate-800">
           <SideBar />
-          <div className="flex h-[15vh] w-full flex-row items-center justify-between px-9">
+          <div className="flex h-[10vh] w-full flex-row items-center justify-between px-9">
             <div className="flex flex-row items-center space-x-5">
               <div className="flex flex-col items-stretch justify-center">
                 <h1 className="text-4xl font-bold uppercase text-slate-800">
