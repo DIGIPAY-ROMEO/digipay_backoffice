@@ -10,7 +10,7 @@ const SideBar = (): JSX.Element => {
     setSearchNav(e.currentTarget.value);
 
   return (
-    <div className="hidden max-h-[100vh] w-[40vh] flex-col justify-between bg-white p-5 lg:flex">
+    <div className="hidden max-h-[100vh] w-[17vw] flex-col justify-between bg-white p-5 lg:flex">
       <div
         className="flex flex-col items-stretch justify-center"
         role={"button"}
@@ -27,6 +27,7 @@ const SideBar = (): JSX.Element => {
         value={searchedNav}
         onChange={handleOnChange}
       />
+
       <div className="flex flex-1 flex-col items-stretch justify-start overflow-scroll pl-3 ">
         {NAV_ROUTES.filter((route) =>
           route.name.toLowerCase().includes(searchedNav.toLowerCase())
@@ -59,7 +60,7 @@ const SideBar = (): JSX.Element => {
         })}
       </div>
 
-      <div className="dropdown-right dropdown-end dropdown pt-2" role="button">
+      <div className="dropdown-right dropdown dropdown-end pt-2" role="button">
         <div
           tabIndex={0}
           className="flex flex-row items-center justify-between"

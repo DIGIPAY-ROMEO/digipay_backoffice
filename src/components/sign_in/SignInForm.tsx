@@ -35,7 +35,9 @@ export default function SignInForm(): JSX.Element {
         placeholder="yourdigipay@email.com"
       />
       {errors?.email && (
-        <small className="text-error">{errors.email.message}</small>
+        <small className="px-2 text-xs text-error">
+          {errors.email.message}
+        </small>
       )}
 
       <input
@@ -45,7 +47,9 @@ export default function SignInForm(): JSX.Element {
         placeholder="******"
       />
       {errors?.password && (
-        <small className="text-error">{errors.password.message}</small>
+        <small className="px-2 text-xs text-error">
+          {errors.password.message}
+        </small>
       )}
 
       <div className="form-control">
