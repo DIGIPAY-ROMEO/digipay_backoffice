@@ -38,7 +38,7 @@ const PageView: NextPage = (): JSX.Element => {
           <div
             key={route.id}
             role={"button"}
-            className="dropdown-right dropdown-hover dropdown "
+            className="dropdown-hover dropdown-right dropdown "
           >
             <MdArrowRight tabIndex={0} size={60} />
             <ul
@@ -71,7 +71,7 @@ const PageView: NextPage = (): JSX.Element => {
           <SideBar />
           <div className="flex max-h-[100vh] w-full max-w-full flex-col items-stretch justify-start">
             <DashboardHeader />
-            <GenericTable />
+            {!router.asPath.includes("dashboard") && <GenericTable />}
           </div>
         </main>
       )}

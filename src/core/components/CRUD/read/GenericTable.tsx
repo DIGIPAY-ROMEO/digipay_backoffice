@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import moment from "moment";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
@@ -39,16 +40,21 @@ const GenericTable = (): JSX.Element => {
   }, [currentPage]);
 
   return (
-    <div className="w-full overflow-x-scroll overflow-y-scroll p-9">
-      <table className="table w-full shadow-lg">
+    <div className="max-w-full p-9">
+      <table className="table w-full table-fixed overflow-x-scroll shadow-lg">
         {/* head */}
         <thead>
           <tr>
-            <th>TRANSACTION ID</th>
-            <th>USER</th>
-            <th>TOTAL COST</th>
+            <th>ID</th>
+            <th>STATUS</th>
             <th>CREATED AT</th>
-            <th>TRANSACTION STATUS</th>
+            <th>CATEGORY</th>
+            <th>PRODIVER PRODUCT</th>
+            <th>COST</th>
+            <th>CONVENIENCE FEE</th>
+            <th>SERVICE FEE</th>
+            <th>REBATES</th>
+            <th>TOTAL COST</th>
           </tr>
         </thead>
         <tbody>
@@ -56,13 +62,10 @@ const GenericTable = (): JSX.Element => {
             <tr
               key={index}
               role={"button"}
-              className="hover"
+              className="hover text-xs"
               onClick={() => alert(JSON.stringify(data, 0, 2))}
             >
               <td className="bg-white">{data?.id}</td>
-              <td className="truncate bg-white">{data?.title}</td>
-              <td className="text-ellipsis bg-white">666.66</td>
-              <td className="text-ellipsis bg-white">March 05, 2023 11:11</td>
               <td className="bg-white">
                 <p
                   className={`p-2 text-center text-white rounded-md${
@@ -72,6 +75,18 @@ const GenericTable = (): JSX.Element => {
                   {data?.completed ? "Successful" : "Pending"}
                 </p>
               </td>
+              <td className="max-w-[50px] truncate whitespace-pre-line bg-white">
+                {moment().format("MMMM Do YYYY") +
+                  "\n" +
+                  moment().format("h:mm:ss a")}
+              </td>
+              <td className="max-w-[50px] truncate bg-white">{data?.title}</td>
+              <td className="max-w-[50px] truncate bg-white">{data?.title}</td>
+              <td className=" bg-white">666.66</td>
+              <td className=" bg-white">666.66</td>
+              <td className=" bg-white">666.66</td>
+              <td className=" bg-white">666.66</td>
+              <td className=" bg-white">666.66</td>
             </tr>
           ))}
         </tbody>
@@ -86,15 +101,18 @@ const GenericTable = (): JSX.Element => {
         )}
         <div className="btn-group">
           <button
-            disabled={currentPage <= 1}
+            disabled={currentPage <= 1 || isLoading}
             className="btn"
             onClick={() => setCurrentPage((prevState) => (prevState -= 1))}
           >
             «
           </button>
-          <button className="btn">{`Page ${currentPage}`}</button>
           <button
-            disabled={currentPage >= pageLength}
+            disabled={isLoading}
+            className="btn"
+          >{`Page ${currentPage}`}</button>
+          <button
+            disabled={currentPage >= pageLength || isLoading}
             className="btn"
             onClick={() => setCurrentPage((prevState) => (prevState += 1))}
           >
