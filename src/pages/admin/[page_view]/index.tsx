@@ -11,7 +11,7 @@ const PageView: NextPage = (): JSX.Element => {
   const router = useRouter();
 
   const DashboardHeader = (): JSX.Element => (
-    <div className="flex h-[10vh] w-full flex-row items-center justify-between px-9">
+    <div className="flex w-full flex-row items-center justify-between px-9 pt-10">
       <div className="flex flex-row items-center space-x-5">
         <div className="flex flex-col items-stretch justify-center">
           <h1 className="text-4xl font-bold uppercase text-slate-800">
@@ -67,9 +67,9 @@ const PageView: NextPage = (): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {router.isReady && (
-        <main className="flex min-h-screen flex-row items-stretch justify-start bg-base-100 text-slate-800">
+        <main className="flex max-h-screen flex-row items-stretch justify-start overflow-scroll bg-base-100 text-slate-800">
           <SideBar />
-          <div className="flex max-h-[100vh] w-full max-w-full flex-col items-stretch justify-start">
+          <div className="flex  w-full max-w-full flex-col items-stretch justify-start">
             <DashboardHeader />
             {!router.asPath.includes("dashboard") && <GenericTable />}
           </div>

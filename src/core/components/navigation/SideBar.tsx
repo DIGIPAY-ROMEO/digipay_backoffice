@@ -16,7 +16,7 @@ const SideBar = (): JSX.Element => {
 
   return (
     <div
-      className={`hidden max-h-[100vh] ${
+      className={`hidden ${
         fold && !pinSideBar ? "" : "w-[17vw]"
       } flex-col justify-between bg-white p-5 lg:flex`}
       onMouseEnter={() => {
@@ -42,7 +42,11 @@ const SideBar = (): JSX.Element => {
         {fold ? (
           <AiOutlineMenuUnfold onClick={togglePin} size={30} />
         ) : (
-          <AiOutlineMenuFold onClick={togglePin} size={30} />
+          <AiOutlineMenuFold
+            onClick={togglePin}
+            size={30}
+            color={pinSideBar ? "#eb2426" : ""}
+          />
         )}
       </div>
 
@@ -92,7 +96,7 @@ const SideBar = (): JSX.Element => {
 
       {!fold && (
         <div
-          className="dropdown-right dropdown-end dropdown pt-2"
+          className="dropdown-right dropdown dropdown-end pt-2"
           role="button"
         >
           <div
