@@ -85,7 +85,15 @@ const GenericTable = (): JSX.Element => {
                 key={index}
                 role={"button"}
                 className="hover text-xs"
-                onClick={() => alert(JSON.stringify(data, 0, 2))}
+                onClick={
+                  Object.keys(Router.query).length > 1
+                    ? undefined
+                    : () =>
+                        void Router.push({
+                          pathname: Router.asPath,
+                          query: { ...data },
+                        })
+                }
               >
                 <td className="bg-white">{data?.id}</td>
                 {Router.asPath.includes("transaction") && (

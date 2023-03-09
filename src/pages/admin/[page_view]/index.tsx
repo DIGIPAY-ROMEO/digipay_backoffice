@@ -15,7 +15,7 @@ const PageView: NextPage = (): JSX.Element => {
       <div className="flex flex-row items-center space-x-5">
         <div className="flex flex-col items-stretch justify-center">
           <h1 className="text-4xl font-bold uppercase text-slate-800">
-            {router.asPath.split("/")[2]?.split("_").join(" ")}
+            {router.asPath.split("/")[2]?.split("_").join(" ")?.split("?")[0]}
           </h1>
           <div className="breadcrumbs text-sm text-slate-400">
             <ul>
@@ -26,14 +26,20 @@ const PageView: NextPage = (): JSX.Element => {
               </li>
               <li>
                 <Link href={router.asPath} className="capitalize">
-                  {router.asPath.split("/")[2]?.split("_").join(" ")}
+                  {
+                    router.asPath
+                      .split("/")[2]
+                      ?.split("_")
+                      .join(" ")
+                      ?.split("?")[0]
+                  }
                 </Link>
               </li>
             </ul>
           </div>
         </div>
         {NAV_ROUTES.filter(
-          (route) => router.asPath === route.href && route.hasChildRoute
+          (route) => router.asPath.includes(route.href) && route.hasChildRoute
         ).map((route) => (
           <div
             key={route.id}
