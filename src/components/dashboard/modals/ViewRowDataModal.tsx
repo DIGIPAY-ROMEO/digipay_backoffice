@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/jsx-key */
 import { useRouter } from "next/router";
 import { ChangeEventHandler, useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import { FiMoreHorizontal, FiShare2 } from "react-icons/fi";
 const ViewRowDataModal = (): JSX.Element => {
   const router = useRouter();
   const { id, completed } = router.query;
+  const transId = id ? id : 0;
   const [linkCopied, setLinkCopied] = useState(false);
   const [approvedRequest, setApprovedRequest] = useState<boolean | undefined>(
     undefined
@@ -33,7 +35,7 @@ const ViewRowDataModal = (): JSX.Element => {
         type="checkbox"
         id="view-row-data-modal"
         className="modal-toggle"
-        checked={id ? true : false}
+        checked={transId ? true : false}
       />
       <div className="modal modal-bottom sm:modal-middle">
         <div
@@ -46,7 +48,7 @@ const ViewRowDataModal = (): JSX.Element => {
           <div className="flex flex-row items-start justify-start">
             <div>
               <p className="text-slate-400">Transaction #</p>
-              <h3 className="text-2xl font-bold">{id}</h3>
+              <h3 className="text-2xl font-bold">{transId}</h3>
             </div>
             <div className="ml-auto flex flex-row items-center justify-start space-x-5">
               <label
@@ -192,25 +194,25 @@ const ViewRowDataModal = (): JSX.Element => {
               <div
                 className="tooltip tooltip-bottom"
                 data-tip={
-                  completed === "true"
+                  completed === "true" && router.isReady
                     ? "Successful"
-                    : id % 2 === 0
+                    : parseInt(transId.toString()) % 2 === 0
                     ? ` Failed to complete transaction`
                     : "Pending"
                 }
               >
                 <p
                   className={`max-w-full truncate p-2 text-center text-white rounded-md${
-                    completed === "true"
+                    completed === "true" && router.isReady
                       ? ` bg-success`
-                      : id % 2 === 0
+                      : parseInt(transId.toString()) % 2 === 0
                       ? ` bg-error`
                       : ` bg-amber-500`
                   }`}
                 >
-                  {completed === "true"
+                  {completed === "true" && router.isReady
                     ? "Successful"
-                    : id % 2 === 0
+                    : parseInt(transId.toString()) % 2 === 0
                     ? ` Failed to complete transaction`
                     : "Pending"}
                 </p>
@@ -235,7 +237,7 @@ const ViewRowDataModal = (): JSX.Element => {
 
               <div className="divider" />
               {router.asPath.includes("top-ups") &&
-              id % 2 !== 0 &&
+              parseInt(transId.toString()) % 2 !== 0 &&
               completed === "false" ? (
                 <>
                   <p className="pb-3 text-xl font-bold">Request Actions</p>
