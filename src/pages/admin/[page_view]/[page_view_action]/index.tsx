@@ -11,7 +11,7 @@ const PageViewAction: NextPage = (): JSX.Element => {
   const router = useRouter();
   const DashboardHeader = (): JSX.Element => (
     <div className="flex w-full flex-row items-center justify-between px-9 pt-10">
-      <div className="flex flex-row items-center space-x-5">
+      <div className="flex w-full flex-row items-center justify-between">
         <div className="flex flex-col items-stretch justify-center">
           <h1 className="text-4xl font-bold uppercase text-slate-800">
             {router.asPath.split("/")[2]?.split("_").join(" ")}
@@ -41,6 +41,7 @@ const PageViewAction: NextPage = (): JSX.Element => {
             </ul>
           </div>
         </div>
+
         <div
           role="button"
           onClick={() =>

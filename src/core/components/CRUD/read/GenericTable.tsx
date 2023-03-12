@@ -5,7 +5,11 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
-import { FilterModal, SearchModal } from "~/components/dashboard/modals";
+import {
+  FilterModal,
+  SearchModal,
+  ViewRowDataModal,
+} from "~/components/dashboard/modals";
 interface MockDataType {
   [key: string]: unknown;
 }
@@ -52,12 +56,12 @@ const GenericTable = (): JSX.Element => {
           </small>
           <div className="flex flex-row space-x-5">
             <div className="tooltip tooltip-bottom ml-auto" data-tip="Search">
-              <label htmlFor="search-modal" className="btn-square btn">
+              <label htmlFor="search-modal" className="btn btn-square">
                 <FaSearch />
               </label>
             </div>
             <div className="tooltip tooltip-bottom" data-tip="Filter">
-              <label htmlFor="filter-modal" className="btn-square btn">
+              <label htmlFor="filter-modal" className="btn btn-square">
                 <FaFilter />
               </label>
             </div>
@@ -67,8 +71,7 @@ const GenericTable = (): JSX.Element => {
           {/* head */}
           <thead>
             <tr>
-              <th>ID</th>
-              {Router.asPath.includes("transaction") && <th>STATUS</th>}
+              <th>ID</th> <th>STATUS</th>
               <th>CREATED AT</th>
               <th>CATEGORY</th>
               <th>PRODIVER PRODUCT</th>
@@ -96,36 +99,35 @@ const GenericTable = (): JSX.Element => {
                 }
               >
                 <td className="bg-white">{data?.id}</td>
-                {Router.asPath.includes("transaction") && (
-                  <td className="bg-white">
-                    <div
-                      className="tooltip tooltip-bottom w-full"
-                      data-tip={
+
+                <td className="bg-white">
+                  <div
+                    className="tooltip tooltip-bottom w-full"
+                    data-tip={
+                      data?.completed
+                        ? "Successful"
+                        : data?.id % 2 === 0
+                        ? ` Failed to complete transaction`
+                        : "Pending"
+                    }
+                  >
+                    <p
+                      className={`max-w-full truncate p-2 text-center text-white rounded-md${
                         data?.completed
-                          ? "Successful"
-                          : index % 2 === 0
-                          ? ` Failed to complete transaction`
-                          : "Pending"
-                      }
+                          ? ` bg-success`
+                          : data?.id % 2 === 0
+                          ? ` bg-error`
+                          : ` bg-amber-500`
+                      }`}
                     >
-                      <p
-                        className={`max-w-full truncate p-2 text-center text-white rounded-md${
-                          data?.completed
-                            ? ` bg-success`
-                            : index % 2 === 0
-                            ? ` bg-error`
-                            : ` bg-amber-500`
-                        }`}
-                      >
-                        {data?.completed
-                          ? "Successful"
-                          : index % 2 === 0
-                          ? ` Failed to complete transaction`
-                          : "Pending"}
-                      </p>
-                    </div>
-                  </td>
-                )}
+                      {data?.completed
+                        ? "Successful"
+                        : data?.id % 2 === 0
+                        ? ` Failed to complete transaction`
+                        : "Pending"}
+                    </p>
+                  </div>
+                </td>
                 <td className="max-w-[50px] truncate whitespace-pre-line bg-white">
                   {moment().format("MMMM Do YYYY") +
                     "\n" +
@@ -170,7 +172,7 @@ const GenericTable = (): JSX.Element => {
             </span>
           </small>
           {isLoading ? (
-            <p className="btn-disabled loading btn mx-3 ml-auto bg-base-100 text-black">
+            <p className="btn btn-disabled loading mx-3 ml-auto bg-base-100 text-black">
               Loading...
             </p>
           ) : (
@@ -201,6 +203,7 @@ const GenericTable = (): JSX.Element => {
 
       <SearchModal />
       <FilterModal />
+      <ViewRowDataModal />
     </>
   );
 };
