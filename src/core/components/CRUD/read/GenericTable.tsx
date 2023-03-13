@@ -5,9 +5,11 @@
 import moment from "moment";
 import Router from "next/router";
 import { useEffect, useState } from "react";
+import { AiFillFileAdd } from "react-icons/ai";
 import { FaSearch, FaFilter } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import {
+  CreateModal,
   FilterModal,
   SearchModal,
   ViewRowDataModal,
@@ -21,6 +23,8 @@ const GenericTable = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [pageLength, setPageLength] = useState<number>(0);
+  const isTopupOrTransactionPage =
+    Router.asPath.includes("top-ups") || Router.asPath.includes("transactions");
   const pageLimit = 20;
 
   useEffect(() => {
@@ -67,13 +71,21 @@ const GenericTable = (): JSX.Element => {
                 <FaFilter />
               </label>
             </div>
+            {!isTopupOrTransactionPage && (
+              <div className="tooltip tooltip-bottom" data-tip="Create">
+                <label htmlFor="create-data-modal" className="btn btn-square">
+                  <AiFillFileAdd />
+                </label>
+              </div>
+            )}
           </div>
         </div>
-        <table className="table w-full table-fixed overflow-x-scroll shadow-lg">
+        <table className="table w-full overflow-x-scroll shadow-lg sm:table-fixed">
           {/* head */}
           <thead>
             <tr>
-              <th>ID</th> <th>STATUS</th>
+              <th>ID</th>
+              {isTopupOrTransactionPage ? <th>STATUS</th> : null}
               <th>CREATED AT</th>
               <th>CATEGORY</th>
               <th>PRODIVER PRODUCT</th>
@@ -102,34 +114,36 @@ const GenericTable = (): JSX.Element => {
               >
                 <td className="bg-white">{data?.id}</td>
 
-                <td className="bg-white">
-                  <div
-                    className="tooltip tooltip-bottom w-full"
-                    data-tip={
-                      data?.completed
-                        ? "Successful"
-                        : data?.id % 2 === 0
-                        ? ` Failed to complete transaction`
-                        : "Pending"
-                    }
-                  >
-                    <p
-                      className={`max-w-full truncate p-2 text-center text-white rounded-md${
+                {isTopupOrTransactionPage ? (
+                  <td className="bg-white">
+                    <div
+                      className="tooltip tooltip-bottom w-full"
+                      data-tip={
                         data?.completed
-                          ? ` bg-success`
+                          ? "Successful"
                           : data?.id % 2 === 0
-                          ? ` bg-error`
-                          : ` bg-amber-500`
-                      }`}
+                          ? ` Failed to complete transaction`
+                          : "Pending"
+                      }
                     >
-                      {data?.completed
-                        ? "Successful"
-                        : data?.id % 2 === 0
-                        ? ` Failed to complete transaction`
-                        : "Pending"}
-                    </p>
-                  </div>
-                </td>
+                      <p
+                        className={`max-w-full truncate p-2 text-center text-white rounded-md${
+                          data?.completed
+                            ? ` bg-success`
+                            : data?.id % 2 === 0
+                            ? ` bg-error`
+                            : ` bg-amber-500`
+                        }`}
+                      >
+                        {data?.completed
+                          ? "Successful"
+                          : data?.id % 2 === 0
+                          ? ` Failed to complete transaction`
+                          : "Pending"}
+                      </p>
+                    </div>
+                  </td>
+                ) : null}
                 <td className="max-w-[50px] truncate whitespace-pre-line bg-white">
                   {moment().format("MMMM Do YYYY") +
                     "\n" +
@@ -206,6 +220,7 @@ const GenericTable = (): JSX.Element => {
       <SearchModal />
       <FilterModal />
       <ViewRowDataModal />
+      <CreateModal />
     </>
   );
 };

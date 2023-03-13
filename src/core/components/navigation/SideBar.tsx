@@ -16,7 +16,7 @@ const SideBar = (): JSX.Element => {
 
   return (
     <div
-      className={`hidden ${
+      className={`hidden min-h-screen ${
         fold && !pinSideBar ? "" : "w-[17vw]"
       } flex-col justify-between bg-white p-5 lg:flex`}
       onMouseEnter={() => {
@@ -96,7 +96,7 @@ const SideBar = (): JSX.Element => {
 
       {!fold && (
         <div
-          className="dropdown-right dropdown dropdown-end pt-2"
+          className="dropdown-end dropdown dropdown-right pt-2"
           role="button"
         >
           <div
