@@ -1,21 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 const CreateModal = (): JSX.Element => {
   const router = useRouter();
-  const { id, completed } = router.query;
-  const transId = id ? id : 0;
-  const [linkCopied, setLinkCopied] = useState(false);
-  const [willUpdateData, setWillUpdateData] = useState(false);
-  const [approvedRequest, setApprovedRequest] = useState<boolean | undefined>(
-    undefined
-  );
-  const [actionSelected, setActionSelected] = useState<boolean | undefined>(
-    undefined
-  );
-
-  const isTopupPage = router.asPath.includes("top-ups");
-  const isTransactionsPage = router.asPath.includes("transactions");
+  const { id } = router.query;
   return (
     <>
       <input type="checkbox" id="create-data-modal" className="modal-toggle" />
