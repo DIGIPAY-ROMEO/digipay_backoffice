@@ -14,6 +14,7 @@ import {
   SearchModal,
   ViewRowDataModal,
 } from "~/components/dashboard/modals";
+
 interface MockDataType {
   [key: string]: unknown;
 }
